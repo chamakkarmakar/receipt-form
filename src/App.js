@@ -1,10 +1,13 @@
 import './App.css';
+import Form from './components/Form/Form';
 
 function App() {
+  
   return (
     <div>
-      Receipt 
+      <Form />
     </div>
+    
   );
 }
 
