@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import Table from '../Table/Table';
 import "./Form.css";
 
 const Form = () => {
@@ -28,7 +29,8 @@ const Form = () => {
         event.target.reset();
       }
   return (
-    <div className="container">
+    <div>
+      <div className="container">
       <form onSubmit={handleSubmit}>
         <h1>Receipts Details</h1>
         <div className="row">
@@ -72,6 +74,8 @@ const Form = () => {
           <input type="reset" value="Cancel" />
         </div>
       </form>
+    </div>
+    <Table arr={arr} />
     </div>
   )
 }
