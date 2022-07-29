@@ -1,7 +1,7 @@
 import React from 'react';
 import "./Table.css";
 
-const Table = () => {
+const Table = ({date,amount,payment,remark}) => {
   return (
     <div className="table-wrapper">
     <table className="fl-table">
@@ -16,10 +16,10 @@ const Table = () => {
         <tbody>
            
         <tr>
-            <td>Content 1</td>
-            <td>Content 1</td>
-            <td>Content 1</td>
-            <td>Content 1</td>
+            <td>{date}</td>
+            <td>{amount}</td>
+            <td>{payment}</td>
+            <td>{remark}</td>
         </tr>
         
         </tbody>

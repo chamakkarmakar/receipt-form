@@ -1,81 +1,88 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import Table from '../Table/Table';
 import "./Form.css";
 
 const Form = () => {
-    const arr = [];
-    const dateRef = useRef('');
-    const amountRef = useRef('');
-    const paymentRef = useRef('');
-    const remarkRef = useRef('');
+  const lists = [];
 
-    const handleSubmit = event => {
-        event.preventDefault();
-        const date = dateRef.current.value;
-        const amount = amountRef.current.value;
-        const payment = paymentRef.current.value;
-        const remark = remarkRef.current.value;
+  const [date, setDate] = useState('');
+  const [amount, setAmount] = useState('');
+  const [payment, setPayment] = useState('');
+  const [remark, setRemark] = useState('');
 
-        const data = {
-            date : date, 
-            amount : amount,
-            payment : payment,
-            remark : remark
-        }
-        console.log(data);
-        arr.push(data);
-        console.log(arr);
+  const handleSubmit = event => {
+    event.preventDefault();
+    setDate(event.target.date.value);
+    setAmount(event.target.amount.value);
+    setPayment(event.target.payment.value);
+    setRemark(event.target.remark.value);
 
-        event.target.reset();
-      }
+
+    const data = {
+      date: date,
+      amount: amount,
+      payment: payment,
+      remark: remark
+    }
+    lists.push(data);
+    console.log(lists);
+    event.target.reset();
+  }
+ 
   return (
     <div>
       <div className="container">
-      <form onSubmit={handleSubmit}>
-        <h1>Receipts Details</h1>
-        <div className="row">
-          <div className="col-25">
-            <label htmlFor="date">Date</label>
+        <form onSubmit={handleSubmit}>
+          <h1>Receipts Details</h1>
+          <div className="row">
+            <div className="col-25">
+              <label htmlFor="date">Date</label>
+            </div>
+            <div className="col-75">
+              <input type="date" id="date" name="date" placeholder="Enter Date" required />
+            </div>
           </div>
-          <div className="col-75">
-            <input type="date" id="date" name="date" ref={dateRef} placeholder="Enter Date" />
+          <div className="row">
+            <div className="col-25">
+              <label htmlFor="amount">Amount</label>
+            </div>
+            <div className="col-75">
+              <input type="text" id="amount" name="amount" placeholder="Enter Amount (in INR)" required />
+            </div>
           </div>
-        </div>
-        <div className="row">
-          <div className="col-25">
-            <label htmlFor="amount">Amount</label>
+          <div className="row">
+            <div className="col-25">
+              <label htmlFor="payment">Payment Mode</label>
+            </div>
+            <div className="col-75">
+              <select id="payment" name="payment" required>
+                <option value="cash">Cash</option>
+                <option value="paypal">PayPal</option>
+                <option value="card">Card</option>
+              </select>
+            </div>
           </div>
-          <div className="col-75">
-            <input type="text" id="amount" name="amount" ref={amountRef} placeholder="Enter Amount (in INR)" />
+          <div className="row">
+            <div className="col-25">
+              <label htmlFor="remark">Remark</label>
+            </div>
+            <div className="col-75">
+              <input type="text" id="remark" name="remark" placeholder="Enter Remark" />
+            </div>
           </div>
-        </div>
-        <div className="row">
-          <div className="col-25">
-            <label htmlFor="payment">Payment Mode</label>
+          <div className="row">
+            <input type="submit" value="Submit" />
+            <input type="reset" value="Cancel" />
           </div>
-          <div className="col-75">
-            <select id="payment" name="payment" ref={paymentRef}>
-              <option value="cash">Cash</option>
-              <option value="paypal">PayPal</option>
-              <option value="card">Card</option>
-            </select>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-25">
-            <label htmlFor="remark">Remark</label>
-          </div>
-          <div className="col-75">
-            <input type="text" id="remark" name="remark" ref={remarkRef} placeholder="Enter Remark" />
-          </div>
-        </div>
-        <div className="row">
-          <input type="submit" value="Submit" />
-          <input type="reset" value="Cancel" />
-        </div>
-      </form>
-    </div>
-    <Table arr={arr} />
+        </form>
+      </div>
+
+      <Table 
+      date={date}
+      amount={amount}
+      payment={payment}
+      remark={remark}></Table>
+
     </div>
   )
 }
